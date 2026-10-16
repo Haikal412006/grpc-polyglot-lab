@@ -1,5 +1,5 @@
 # Praktikum gRPC Polyglot
-
+<div align="justify">
 Proyek ini merupakan praktikum komunikasi antarbahasa pemrograman menggunakan gRPC. Go digunakan sebagai server, sedangkan Python dan Node.js digunakan sebagai client.
 
 ## Teknologi yang Digunakan
@@ -20,28 +20,33 @@ grpc-polyglot-lab/
 ├── go-server/
 │   ├── main.go
 │   ├── go.mod
+│   ├── go.sum
 │   └── pb/
+│       ├── user.pb.go
+│       └── user_grpc.pb.go
 ├── python-client/
 │   ├── client.py
 │   ├── requirements.txt
-│   └── venv/
+│   ├── user_pb2.py
+│   └── user_pb2_grpc.py
 └── node-client/
     ├── client.js
-    └── package.json
+    ├── package.json
+    └── package-lock.json
 ```
 
 ## Cara Menjalankan
 
 ### 1. Menjalankan Go Server
 
-Buka terminal pertama, lalu jalankan:
+Buka terminal pertama dari folder utama proyek, lalu jalankan:
 
 ```powershell
 cd go-server
 go run .
 ```
 
-Server berjalan pada port `50051`.
+Server berjalan pada port `50051`. Biarkan terminal ini tetap terbuka.
 
 ### 2. Menjalankan Python Client
 
@@ -61,11 +66,11 @@ cd node-client
 node client.js
 ```
 
-**Catatan:** Go Server harus tetap berjalan saat kedua client dijalankan.
+**Catatan:** Go Server harus tetap berjalan ketika Python Client dan Node.js Client dijalankan.
 
 ## Hasil Pengujian
 
-Python Client dan Node.js Client berhasil mengirim request ke Go Server dan menerima respons berikut:
+Python Client dan Node.js Client berhasil mengirim request ke Go Server dan menerima respons data pengguna berikut:
 
 ```text
 Nama: Haikal
@@ -75,16 +80,13 @@ Phone: 081234567890
 
 Go Server juga berhasil mencatat request untuk User ID `1`.
 
-## Analisis
+## Analisis Static Code Generation dan Dynamic Runtime Loading
 
-Go dan Python menggunakan metode *static code generation*, yaitu kode dibuat terlebih dahulu berdasarkan file `user.proto`.
+Pada proyek gRPC Polyglot ini, Go dan Python menggunakan pendekatan *static code generation*. Skema data yang didefinisikan dalam file `user.proto` dikompilasi terlebih dahulu untuk menghasilkan kode pendukung gRPC yang digunakan oleh server Go dan client Python. Ketika terdapat perubahan pada skema, seperti penambahan field `phone`, kode hasil generasi perlu dibuat ulang agar aplikasi dapat menggunakan field baru tersebut.
 
-Node.js menggunakan metode *dynamic runtime loading*, yaitu membaca file `user.proto` saat aplikasi dijalankan.
+Sementara itu, Node.js menggunakan pendekatan *dynamic runtime loading* melalui library `@grpc/proto-loader`. Skema `user.proto` dibaca saat aplikasi dijalankan sehingga tidak memerlukan proses generasi kode statis yang sama seperti Go dan Python. Kedua pendekatan memungkinkan aplikasi dengan bahasa pemrograman berbeda berkomunikasi menggunakan kontrak data yang sama, tetapi memiliki alur pemrosesan skema yang berbeda.
 
 ## Kesimpulan
 
 Praktikum gRPC Polyglot berhasil dilakukan. Go Server dapat menerima request dari Python Client dan Node.js Client. Kedua client berhasil menerima data pengguna berupa nama, email, dan nomor telepon melalui komunikasi gRPC.
-
-## Analisis 
-
-Pada proyek gRPC Polyglot ini, Go dan Python menggunakan pendekatan static code generation. Skema data yang didefinisikan dalam file user.proto dikompilasi terlebih dahulu untuk menghasilkan kode pendukung gRPC yang digunakan oleh server Go dan client Python. Ketika terdapat perubahan pada skema, seperti penambahan field phone, kode hasil generasi perlu dibuat ulang agar aplikasi dapat menggunakan field baru tersebut. Sementara itu, Node.js menggunakan pendekatan dynamic runtime loading melalui library @grpc/proto-loader, sehingga skema user.proto dibaca saat aplikasi dijalankan dan tidak memerlukan proses generasi kode statis yang sama seperti Go dan Python. Kedua pendekatan memungkinkan aplikasi berbeda bahasa berkomunikasi menggunakan kontrak data yang sama, tetapi memiliki alur pemrosesan skema yang berbeda.
+</div>
