@@ -110,6 +110,7 @@ Respon dari Server -> Nama: Haikal, Email: haikal@pnl.ac.id, Phone: 081234567890
 Hasil tersebut menunjukkan bahwa server berhasil mengirimkan data nama, email, dan nomor telepon kepada client melalui komunikasi gRPC.
 
 Hasil Go Server
+
 Go Server berhasil dijalankan pada port 50051. Setelah client melakukan request, server mencatat permintaan untuk User ID 1.
 
 ## Analisis Static Code Generation dan Dynamic Runtime Loading
