@@ -138,9 +138,3 @@ Praktikum gRPC Polyglot berhasil mengimplementasikan komunikasi antara Go Server
 Praktikum ini juga menunjukkan perbedaan antara *static code generation* yang digunakan oleh Go dan Python serta *dynamic runtime loading* yang digunakan oleh Node.js. Dengan menggunakan Protocol Buffers sebagai kontrak komunikasi, ketiga komponen dapat bertukar data secara konsisten meskipun dikembangkan menggunakan bahasa pemrograman yang berbeda.
 
 </div>
-
-## Repository GitHub
-
-Kode sumber proyek tersedia pada repository berikut:
-
-**[Haikal412006/grpc-polyglot-lab](https://github.com/Haikal412006/grpc-polyglot-lab)**
